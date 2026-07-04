@@ -1,0 +1,61 @@
+# ==========================
+# Dependencies
+# ==========================
+Backend/node_modules/
+Frontend/node_modules/
+
+# ==========================
+# Environment Variables
+# ==========================
+Backend/.env
+Frontend/.env
+.env
+
+# ==========================
+# Build
+# ==========================
+Backend/dist/
+Backend/build/
+Frontend/dist/
+Frontend/build/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+logs/
+
+# ==========================
+# Coverage
+# ==========================
+coverage/
+
+# ==========================
+# Uploads
+# ==========================
+Backend/uploads/
+Backend/encrypted/
+Backend/decrypted/
+
+# ==========================
+# IDE
+# ==========================
+.vscode/
+.idea/
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Cache
+# ==========================
+.cache/
+
+# ==========================
+# Temporary Files
+# ==========================
+*.tmp
+*.temp
