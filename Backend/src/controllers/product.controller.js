@@ -20,9 +20,23 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
 
-    const products = await productService.getProducts();
+    try {
 
-    res.json(products);
+        const result = await productService.getProducts(req.query);
+
+        res.status(200).json({
+            success: true,
+            ...result,
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
 
 };
 

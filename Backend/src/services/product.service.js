@@ -6,10 +6,48 @@ export const createProduct = async (data) => {
 
 };
 
-export const getProducts = async () => {
+export const getProducts = async (queryParams) => {
 
-    return await Product.find().populate("supplier");
+    const {
+        search,
+        category,
+        page = 1,
+        limit = 10,
+        sort = "createdAt",
+        order = "desc",
+    } = queryParams;
 
+    let query = {};
+
+    // Search by product name
+    if (search) {
+        query.name = {
+            $regex: search,
+            $options: "i",
+        };
+    }
+
+    // Filter by category
+    if (category) {
+        query.category = category;
+    }
+
+    const products = await Product.find(query)
+        .populate("supplier")
+        .sort({
+            [sort]: order === "asc" ? 1 : -1,
+        })
+        .skip((page - 1) * limit)
+        .limit(Number(limit));
+
+    const totalProducts = await Product.countDocuments(query);
+
+    return {
+        products,
+        totalProducts,
+        currentPage: Number(page),
+        totalPages: Math.ceil(totalProducts / limit),
+    };
 };
 
 export const getProductById = async (id) => {
