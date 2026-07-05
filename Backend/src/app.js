@@ -7,6 +7,7 @@ import rateLimit from "express-rate-limit";
 import authRoutes from "./routes/auth.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import supplierRoutes from "./routes/supplier.routes.js";
+import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use(limiter);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/suppliers", supplierRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 app.get("/api/v1/health", (req, res) => {
     res.status(200).json({
         success: true,
