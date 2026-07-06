@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import InventoryLog from "../models/InventoryLog.js";
 
 export const createProduct = async (data) => {
 
@@ -71,5 +72,41 @@ export const updateProduct = async (id, data) => {
 export const deleteProduct = async (id) => {
 
     return await Product.findByIdAndDelete(id);
+
+};
+
+//For Inventory Logs
+export const updateStock = async (
+    productId,
+    quantity,
+    remarks,
+    userId
+) => {
+
+    const product = await Product.findById(productId);
+
+    if (!product) {
+        throw new Error("Product not found");
+    }
+
+    const previousQuantity = product.quantity;
+
+    product.quantity = quantity;
+
+    await product.save();
+
+    await InventoryLog.create({
+        product: product._id,
+        previousQuantity,
+        newQuantity: quantity,
+        changeType:
+            quantity > previousQuantity
+                ? "INCREASE"
+                : "DECREASE",
+        updatedBy: userId,
+        remarks,
+    });
+
+    return product;
 
 };

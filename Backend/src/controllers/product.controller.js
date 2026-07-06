@@ -68,3 +68,34 @@ export const deleteProduct = async (req, res) => {
     });
 
 };
+
+//For Inventory Logs
+export const updateStock = async (req, res) => {
+
+    try {
+
+        const { quantity, remarks } = req.body;
+
+        const product = await productService.updateStock(
+            req.params.id,
+            quantity,
+            remarks,
+            req.user._id
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Stock updated successfully",
+            product,
+        });
+
+    } catch (error) {
+
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
