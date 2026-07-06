@@ -9,6 +9,7 @@ import productRoutes from "./routes/product.routes.js";
 import supplierRoutes from "./routes/supplier.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 import inventoryRoutes from "./routes/inventory.routes.js";
+import reportRoutes from "./routes/report.routes.js";
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/suppliers", supplierRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/inventory",inventoryRoutes);
+app.use("/api/v1/reports",reportRoutes);
 app.get("/api/v1/health", (req, res) => {
     res.status(200).json({
         success: true,
