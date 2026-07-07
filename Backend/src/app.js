@@ -21,7 +21,7 @@ app.use(
     cors({
         origin: [
             "http://localhost:5173",
-            "https://inventory-management-system-delta-ochre.vercel.app/",
+            "https://inventory-management-system-delta-ochre.vercel.app",
         ],
         credentials: true,
     })
