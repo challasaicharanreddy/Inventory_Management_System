@@ -6,6 +6,9 @@ import {
     lowStockReport,
     productSummary,
     supplierSummary,
+    stockByCategory,
+    productsBySupplier,
+    topStockProducts,
 } from "../controllers/report.controller.js";
 
 const router = express.Router();
@@ -25,6 +28,21 @@ router.get(
 router.get(
     "/supplier-summary",
     supplierSummary
+);
+
+router.get(
+    "/stock-by-category",
+    stockByCategory
+);
+
+router.get(
+    "/products-by-supplier",
+    productsBySupplier
+);
+
+router.get(
+    "/top-stock-products",
+    topStockProducts
 );
 
 export default router;

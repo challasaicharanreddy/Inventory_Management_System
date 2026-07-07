@@ -1,24 +1,61 @@
 ﻿import { useEffect, useState } from "react";
 import api from "../services/api";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from "chart.js";
+import { Bar, Pie } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 const Reports = () => {
   const [lowStock, setLowStock] = useState([]);
   const [productSummary, setProductSummary] = useState(null);
   const [supplierSummary, setSupplierSummary] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [stockByCategory, setStockByCategory] = useState([]);
+  const [productsBySupplier, setProductsBySupplier] = useState([]);
+  const [topStockProducts, setTopStockProducts] = useState([]);
 
   useEffect(() => {
     const loadReports = async () => {
       try {
-        const [lowStockRes, productRes, supplierRes] = await Promise.all([
+        const [
+          lowStockRes,
+          productRes,
+          supplierRes,
+          stockCatRes,
+          prodBySuppRes,
+          topStockRes,
+        ] = await Promise.all([
           api.get("/reports/low-stock"),
           api.get("/reports/product-summary"),
           api.get("/reports/supplier-summary"),
+          api.get("/reports/stock-by-category"),
+          api.get("/reports/products-by-supplier"),
+          api.get("/reports/top-stock-products"),
         ]);
 
         setLowStock(lowStockRes.data.report || []);
         setProductSummary(productRes.data.summary || null);
         setSupplierSummary(supplierRes.data.summary || []);
+        setStockByCategory(stockCatRes.data.data || []);
+        setProductsBySupplier(prodBySuppRes.data.data || []);
+        setTopStockProducts(topStockRes.data.data || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -49,6 +86,10 @@ const Reports = () => {
         <div className="card">
           <p className="card-title">Average Price</p>
           <div className="card-value">${productSummary?.averagePrice?.toFixed(2) ?? "0.00"}</div>
+        </div>
+        <div className="card">
+          <p className="card-title">Total Inventory Value</p>
+          <div className="card-value">${productSummary?.totalInventoryValue?.toFixed(2) ?? "0.00"}</div>
         </div>
       </div>
 
@@ -105,6 +146,69 @@ const Reports = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div className="panel" style={{ marginTop: 24 }}>
+        <h2>Stock by Category</h2>
+        <div style={{ maxWidth: 800 }}>
+          <Bar
+            data={{
+              labels: stockByCategory.map((s) => s.category || "Uncategorized"),
+              datasets: [
+                {
+                  label: "Total Stock",
+                  data: stockByCategory.map((s) => s.totalStock),
+                  backgroundColor: "rgba(54, 162, 235, 0.6)",
+                },
+              ],
+            }}
+            options={{ responsive: true }}
+          />
+        </div>
+      </div>
+
+      <div className="panel" style={{ marginTop: 24 }}>
+        <h2>Products by Supplier</h2>
+        <div style={{ maxWidth: 600 }}>
+          <Pie
+            data={{
+              labels: productsBySupplier.map((s) => s.supplierName || "Unknown"),
+              datasets: [
+                {
+                  data: productsBySupplier.map((s) => s.productCount),
+                  backgroundColor: [
+                    "#4dc9f6",
+                    "#f67019",
+                    "#f53794",
+                    "#537bc4",
+                    "#acc236",
+                    "#166a8f",
+                  ],
+                },
+              ],
+            }}
+            options={{ responsive: true }}
+          />
+        </div>
+      </div>
+
+      <div className="panel" style={{ marginTop: 24 }}>
+        <h2>Top 5 Highest Stock Products</h2>
+        <div style={{ maxWidth: 800 }}>
+          <Bar
+            data={{
+              labels: topStockProducts.map((p) => p.name),
+              datasets: [
+                {
+                  label: "Quantity",
+                  data: topStockProducts.map((p) => p.quantity),
+                  backgroundColor: "rgba(75, 192, 192, 0.6)",
+                },
+              ],
+            }}
+            options={{ responsive: true }}
+          />
         </div>
       </div>
     </div>

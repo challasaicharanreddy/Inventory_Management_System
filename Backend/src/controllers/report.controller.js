@@ -68,3 +68,30 @@ export const supplierSummary = async (req, res) => {
     }
 
 };
+
+export const stockByCategory = async (req, res) => {
+    try {
+        const data = await reportService.getStockByCategory();
+        res.status(200).json({ success: true, data });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const productsBySupplier = async (req, res) => {
+    try {
+        const data = await reportService.getProductsBySupplier();
+        res.status(200).json({ success: true, data });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const topStockProducts = async (req, res) => {
+    try {
+        const data = await reportService.getTopStockProducts(5);
+        res.status(200).json({ success: true, data });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
