@@ -1,5 +1,7 @@
 import Product from "../models/Product.js";
 import InventoryLog from "../models/InventoryLog.js";
+import User from "../models/user.js";
+import { ROLES } from "../constants/roles.js";
 
 export const createProduct = async (data) => {
 
@@ -103,6 +105,9 @@ export const updateStock = async (
 
     await product.save();
 
+    const user = await User.findById(userId).select("role");
+    const updatedByRole = user?.role || ROLES.EMPLOYEE;
+
     await InventoryLog.create({
         product: product._id,
         previousQuantity,
@@ -112,6 +117,7 @@ export const updateStock = async (
                 ? "INCREASE"
                 : "DECREASE",
         updatedBy: userId,
+        updatedByRole,
         remarks,
     });
 

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ROLES } from "../constants/roles.js";
 
 const inventoryLogSchema = new mongoose.Schema(
     {
@@ -27,6 +28,12 @@ const inventoryLogSchema = new mongoose.Schema(
         updatedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+            required: true,
+        },
+
+        updatedByRole: {
+            type: String,
+            enum: Object.values(ROLES),
             required: true,
         },
 

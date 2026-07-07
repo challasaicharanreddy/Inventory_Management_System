@@ -96,6 +96,7 @@ const Dashboard = () => {
                 <th>Change</th>
                 <th>Previous</th>
                 <th>New</th>
+                <th>Updated By</th>
               </tr>
             </thead>
             <tbody>
@@ -105,6 +106,10 @@ const Dashboard = () => {
                   <td>{log.changeType}</td>
                   <td>{log.previousQuantity}</td>
                   <td>{log.newQuantity}</td>
+                  <td>
+                    {log.updatedBy?.name || "-"}
+                    {log.updatedByRole ? ` (${log.updatedByRole})` : ""}
+                  </td>
                 </tr>
               ))}
             </tbody>

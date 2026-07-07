@@ -153,6 +153,7 @@ const Inventory = () => {
                   <th>Previous</th>
                   <th>New</th>
                   <th>Remarks</th>
+                  <th>Updated By</th>
                   <th>Updated At</th>
                 </tr>
               </thead>
@@ -164,6 +165,10 @@ const Inventory = () => {
                     <td>{log.previousQuantity}</td>
                     <td>{log.newQuantity}</td>
                     <td>{log.remarks || "-"}</td>
+                    <td>
+                      {log.updatedBy?.name || "-"}
+                      {log.updatedByRole ? ` (${log.updatedByRole})` : ""}
+                    </td>
                     <td>{new Date(log.createdAt).toLocaleString()}</td>
                   </tr>
                 ))}
