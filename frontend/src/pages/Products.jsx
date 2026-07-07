@@ -18,6 +18,8 @@ const Products = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [formMode, setFormMode] = useState("add");
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -32,6 +34,7 @@ const Products = () => {
           search,
           page,
           limit: 10,
+          category,
         },
       });
       setProducts(res.data.products || []);
@@ -40,6 +43,15 @@ const Products = () => {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadCategories = async () => {
+    try {
+      const res = await api.get("/products/categories");
+      setCategories(res.data.categories || []);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -55,7 +67,8 @@ const Products = () => {
   useEffect(() => {
     loadProducts();
     loadSuppliers();
-  }, [page, search]);
+    loadCategories();
+  }, [page, search, category]);
 
   const openCreate = () => {
     setFormMode("add");
@@ -147,6 +160,14 @@ const Products = () => {
             placeholder="Search products..."
             style={{ flex: 1, minWidth: 240 }}
           />
+          <select value={category} onChange={(e) => { setCategory(e.target.value); setPage(1); }} style={{ minWidth: 180 }}>
+            <option value="">All Categories</option>
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
           <div>{loading ? "Loading products..." : `Page ${page} of ${totalPages}`}</div>
         </div>
 

@@ -51,6 +51,14 @@ export const getProducts = async (queryParams) => {
     };
 };
 
+export const getCategories = async () => {
+
+    const categories = await Product.distinct("category");
+
+    // Filter out empty/null categories
+    return categories.filter((c) => c && c.trim() !== "");
+
+};
 export const getProductById = async (id) => {
 
     return await Product.findById(id).populate("supplier");
