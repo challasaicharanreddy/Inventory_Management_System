@@ -42,19 +42,19 @@ const Dashboard = () => {
       </div>
 
       <div className="card-grid">
-        <div className="card">
+        <div className="card color-1">
           <p className="card-title">Total Products</p>
           <div className="card-value">{stats.totalProducts ?? 0}</div>
         </div>
-        <div className="card">
+        <div className="card color-2">
           <p className="card-title">Total Suppliers</p>
           <div className="card-value">{stats.totalSuppliers ?? 0}</div>
         </div>
-        <div className="card">
+        <div className="card color-3">
           <p className="card-title">Low Stock</p>
           <div className="card-value">{stats.lowStockProducts ?? 0}</div>
         </div>
-        <div className="card">
+        <div className="card color-4">
           <p className="card-title">Out of Stock</p>
           <div className="card-value">{stats.outOfStockProducts ?? 0}</div>
         </div>

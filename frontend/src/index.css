@@ -245,6 +245,80 @@ button {
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
 }
 
+/* Colored card variations - brighter, vivid for light theme */
+.card.color-1 {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #082544;
+  box-shadow: 0 10px 30px rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.08);
+}
+.card.color-1 .card-title { color: rgba(2,6,23,0.65); }
+.card.color-1 .card-value { color: inherit; }
+
+.card.color-2 {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  color: #064e3b;
+  box-shadow: 0 10px 30px rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.08);
+}
+.card.color-2 .card-title { color: rgba(2,6,23,0.65); }
+.card.color-2 .card-value { color: inherit; }
+
+.card.color-3 {
+  background: linear-gradient(135deg, #fff1e0 0%, #ffd8a8 100%);
+  color: #7c2d12;
+  box-shadow: 0 10px 30px rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.08);
+}
+.card.color-3 .card-title { color: rgba(2,6,23,0.65); }
+.card.color-3 .card-value { color: inherit; }
+
+.card.color-4 {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: #043544;
+  box-shadow: 0 10px 30px rgba(14,165,233,0.12);
+  border: 1px solid rgba(14,165,233,0.08);
+}
+.card.color-4 .card-title { color: rgba(2,6,23,0.65); }
+.card.color-4 .card-value { color: inherit; }
+
+/* Dark theme variants - keep backgrounds vivid but readable */
+:root.dark .card.color-1 {
+  background: linear-gradient(135deg, rgba(14,165,255,0.14) 0%, rgba(59,130,246,0.08) 100%), linear-gradient(180deg, #071127 0%, #0f1724 100%);
+  color: #e6f7ff;
+  border: 1px solid rgba(59,130,246,0.18);
+  box-shadow: 0 8px 30px rgba(59,130,246,0.18);
+}
+:root.dark .card.color-1 .card-title { color: rgba(230,247,255,0.85); }
+:root.dark .card.color-1 .card-value { color: #ffffff; }
+
+:root.dark .card.color-2 {
+  background: linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(5,150,105,0.06) 100%), linear-gradient(180deg, #07121a 0%, #0b2b1f 100%);
+  color: #e6fff5;
+  border: 1px solid rgba(16,185,129,0.18);
+  box-shadow: 0 8px 30px rgba(16,185,129,0.14);
+}
+:root.dark .card.color-2 .card-title { color: rgba(230,255,245,0.85); }
+:root.dark .card.color-2 .card-value { color: #ecfff7; }
+
+:root.dark .card.color-3 {
+  background: linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(249,115,22,0.06) 100%), linear-gradient(180deg, #120b06 0%, #20120a 100%);
+  color: #fff6ea;
+  border: 1px solid rgba(245,158,11,0.16);
+  box-shadow: 0 8px 30px rgba(245,158,11,0.14);
+}
+:root.dark .card.color-3 .card-title { color: rgba(255,246,234,0.88); }
+:root.dark .card.color-3 .card-value { color: #fff5e6; }
+
+:root.dark .card.color-4 {
+  background: linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(14,165,233,0.06) 100%), linear-gradient(180deg, #071827 0%, #071a22 100%);
+  color: #e6fbff;
+  border: 1px solid rgba(14,165,233,0.16);
+  box-shadow: 0 8px 30px rgba(14,165,233,0.16);
+}
+:root.dark .card.color-4 .card-title { color: rgba(230,251,255,0.88); }
+:root.dark .card.color-4 .card-value { color: #eaffff; }
+
 .card-title {
   margin: 0;
   font-size: 14px;

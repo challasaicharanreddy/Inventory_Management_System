@@ -75,19 +75,19 @@ const Reports = () => {
       </div>
 
       <div className="card-grid">
-        <div className="card">
+        <div className="card color-1">
           <p className="card-title">Total Products</p>
           <div className="card-value">{productSummary?.totalProducts ?? 0}</div>
         </div>
-        <div className="card">
+        <div className="card color-2">
           <p className="card-title">Total Stock</p>
           <div className="card-value">{productSummary?.totalStock ?? 0}</div>
         </div>
-        <div className="card">
+        <div className="card color-3">
           <p className="card-title">Average Price</p>
           <div className="card-value">${productSummary?.averagePrice?.toFixed(2) ?? "0.00"}</div>
         </div>
-        <div className="card">
+        <div className="card color-4">
           <p className="card-title">Total Inventory Value</p>
           <div className="card-value">${productSummary?.totalInventoryValue?.toFixed(2) ?? "0.00"}</div>
         </div>
